@@ -12,47 +12,50 @@ class Sentence(object):
             "<->": "XNOR",
         }
 
-        self.symbols = ["(", ")"]
-        self._sentence = self.__convert(sentence)
+        self._symbols = ["(", ")"]
+        self._sentence = self.__tokenize(sentence)
 
     def get_alphabet(self):
         return self._alphabet
 
-    def __convert(self, sentence: str):
+    def __tokenize(self, sentence: str):
         converted_sentence = []
 
         for el in sentence.split():
-            if el in self._operators or el in self._alphabet or el in self.symbols:
+            if el in self._operators or el in self._alphabet or el in self._symbols:
                 if el in self._operators:
-                    converted_sentence.append(self._operators[el])
+                    converted_sentence.append(" " + self._operators[el] + " ")
                 else:
-                    converted_sentence.append(el)
+                    converted_sentence.append(" " + el + " ")
             else:
                 return []
 
         return converted_sentence
 
-    def __check_parenthesis(self):
-        all_parenthesis = []
-
-        for el in self._sentence:
-            if el in self.symbols:
-                all_parenthesis.append(el)
-
-        parenthesis_count = Counter(all_parenthesis)
+    def __check_parentheses(self):
+        parenthesis_count = Counter(self._sentence)
         if parenthesis_count["("] != parenthesis_count[")"]:
             return False
 
-        # Checks open and close parenthesis
-        for i in range(len(self._sentence)):
-            if i != len(self._sentence) - 1:
-                if (
-                    self._sentence[i] in self.symbols
-                    and self._sentence[i + 1] in self.symbols
-                ):
-                    return False
+        reverse_sentence = self._sentence[::-1]
 
-        # Check parenthesis content TODO
+        for i, elm in enumerate(self._sentence):
+            if elm == "(":
+                startIndex = i
+
+                for j, sub in enumerate(reverse_sentence):
+                    if sub == ")":
+                        # [1 , 2 , 3, 4] - [4, 3, 2, 1]
+                        # i === (SENTENCE_SIZE - i) - 1
+                        endIndex = (len(self._sentence) - 1) - j
+                        content = self._sentence[startIndex:endIndex]
+
+                        # Check if parentheses are empty
+                        if len(content) == 1:
+                            return False
+
+                        break
+
         return True
 
     # Checks if the sentence has a logical operator followed by another
@@ -68,25 +71,24 @@ class Sentence(object):
 
     def length(self):
         if len(self._sentence) == 0:
-            return None
+            return 0
 
         length = 0
 
-        for el in self._sentence.split():
-            if el in self._alphabet or el in self._operators:
+        for el in self._sentence:
+            if el in self._alphabet or el in self._operators.values():
                 length = length + 1
 
         return length
 
     def isValid(self):
-        # Check sentence length
-        if len(self._sentence) == 0 or len(self._sentence) > 12:
-            return False
-
-        if not self.__check_parenthesis():
+        if len(self._sentence) == 0:
             return False
 
         if not self.__check_logical_operators():
+            return False
+
+        if not self.__check_parentheses():
             return False
 
         return True
