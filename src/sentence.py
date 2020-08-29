@@ -2,7 +2,7 @@ from collections import Counter
 
 
 class Sentence(object):
-    def __init__(self, alphabet, sentence):
+    def __init__(self, alphabet: list):
         self._alphabet = alphabet
         self._operators = {
             "~": "NOT",
@@ -13,7 +13,18 @@ class Sentence(object):
         }
 
         self._symbols = ["(", ")"]
+        self._sentence = []
+        self._sentence_str = ""
+
+    def set_sentence(self, sentence: str):
         self._sentence = self.__tokenize(sentence)
+        self._sentence_str = sentence
+
+    def get_sentence(self):
+        return self._sentence
+
+    def sentence_to_string(self):
+        return self._sentence_str
 
     def get_alphabet(self):
         return self._alphabet
@@ -24,9 +35,9 @@ class Sentence(object):
         for el in sentence.split():
             if el in self._operators or el in self._alphabet or el in self._symbols:
                 if el in self._operators:
-                    converted_sentence.append(" " + self._operators[el] + " ")
+                    converted_sentence.append(self._operators[el])
                 else:
-                    converted_sentence.append(" " + el + " ")
+                    converted_sentence.append(el.strip())
             else:
                 return []
 
@@ -74,9 +85,8 @@ class Sentence(object):
             return 0
 
         length = 0
-
         for el in self._sentence:
-            if el in self._alphabet or el in self._operators.values():
+            if el not in self._symbols:
                 length = length + 1
 
         return length
