@@ -52,7 +52,7 @@ class Interface(object):
     def setup(self):
         print("\nLogíca para Ciência da Computação | IFMG Campus Formiga\n")
 
-        # self.__how_to_use()
+        self.__how_to_use()
 
         option = 3
         while option != "5":
