@@ -2,7 +2,7 @@
 
 Projeto desenvolvido na disciplina Lógica para Ciência da Computação.
 
-#### Iniciando
+### Funcionamento
 
 ```python
 from Sentence import Sentence
@@ -22,4 +22,11 @@ sentence_1.length() # 9
 
 sentence_2.isValid() # False
 sentence_2.isValid() # 0
+```
+
+### Como executar?
+
+```
+git clone https://github.com/thenriquedb/boolean-algebra.git
+cd boolean-algebra && python3 src/main.py
 ```
