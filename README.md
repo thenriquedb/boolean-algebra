@@ -14,14 +14,15 @@ alphabet = ["P", "Q", "R"]
 ex_1 = " ~ P  ^ ( P ^ Q ( Q <-> R ) )"
 ex_2 = " ~ P  ^ ( P ^ Q ( Q <-> R ) "
 
-sentence_1 = Sentence(alphabet, ex_1)
-sentence_2 = Sentence(alphabet, ex_2)
+sentence = Sentence(alphabet)
 
-sentence_1.isValid() # True
-sentence_1.length() # 9
+sentence.set_sentence(ex_1)
+sentence.isValid() # True
+sentence.length() # 9
 
-sentence_2.isValid() # False
-sentence_2.isValid() # 0
+sentence.set_sentence(ex_2)
+sentence.isValid() # False
+sentence.isValid() # 0
 ```
 
 ### Como executar?
