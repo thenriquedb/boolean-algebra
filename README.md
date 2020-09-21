@@ -23,7 +23,24 @@ sentence.length() # 9
 sentence.set_sentence(ex_2)
 sentence.isValid() # False
 sentence.isValid() # 0
+
+# Truth table
+sentence.set_sentence("p ^ q v s")
+print(sentence.truth_table())
+#        q      s      p  p ^ q v s
+# 0   True   True   True       True
+# 1   True   True  False       True
+# 2   True  False   True       True
+# 3   True  False  False      False
+# 4  False   True   True       True
+# 5  False   True  False       True
+# 6  False  False   True      False
+# 7  False  False  False      False
 ```
+
+### Todo
+
+- [ ] Validar paretênses quando for resolver a sentença
 
 ### Como executar?
 
@@ -31,3 +48,7 @@ sentence.isValid() # 0
 git clone https://github.com/thenriquedb/boolean-algebra.git
 cd boolean-algebra && python3 src/main.py
 ```
+
+### Créditos
+
+Foi utilizados trechos de código do projeto **[truth-table-generator](https://github.com/chicolucio/truth-table-generator)** do usuário **[chicolucio](https://github.com/chicolucio)**.
