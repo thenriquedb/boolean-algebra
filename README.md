@@ -11,8 +11,8 @@ from Sentence import Sentence
 alphabet = ["P", "Q", "R"]
 
 # use white space in each sentence item
-ex_1 = " ~ P  ^ ( P ^ Q ( Q <-> R ) )"
-ex_2 = " ~ P  ^ ( P ^ Q ( Q <-> R ) "
+ex_1 = " ! P  ^ ( P ^ Q ( Q <-> R ) )"
+ex_2 = " ! P  ^ ( P ^ Q ( Q <-> R ) "
 
 sentence = Sentence(alphabet)
 
