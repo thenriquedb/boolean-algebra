@@ -6,21 +6,22 @@ class Interface(object):
     def __init__(self, alphabet):
         self._alphabet = alphabet
         self._sentence = Sentence(alphabet)
-        self._sentence.set_sentence("( P ^ Q ) -> R ")
+        self._sentence.set_sentence("p ^ q -> r")
 
     def __how_to_use(self):
-        print("Alfabeto disponível")
+        print("Alfabeto disponivel")
         print(self._alphabet, "\n")
 
         print("     Operadores disponìveis       ")
         print("| Simbolo |       Operador       |")
-        print("|    ^    |      E               |")
-        print("|    v    |      OU              |")
-        print("|    ->   |      Implicação      |")
-        print("|    ->   |      Bi implicação   |")
+        print("|   !     |      NEGAÇÃO         |")
+        print("|   ^     |      E               |")
+        print("|   v     |      OU              |")
+        print("|   ->    |      Implicação      |")
+        print("|   <->   |      Bi implicação  |")
 
         print("\nNão se esqueça de saltar um espaço após cada simbolo.")
-        print("Exemplo: ( P ^ Q -> R )\n")
+        print("Exemplo:  p ^ q -> r \n")
 
         input("Digite ENTER para continuar...")
         os.system("cls||clear")
@@ -49,19 +50,27 @@ class Interface(object):
         input("Digite ENTER para continuar...")
         os.system("cls||clear")
 
+    def __truth_table(self):
+        table = self._sentence.truth_table()
+        print(table)
+
+        input("\nDigite ENTER para continuar...")
+        os.system("cls||clear")
+
     def setup(self):
         print("\nLogíca para Ciência da Computação | IFMG Campus Formiga\n")
 
         self.__how_to_use()
 
-        option = 3
-        while option != "5":
+        option = ""
+        while option != "6":
             print("MENU\n")
             print("1. Nova sentença")
             print("2. Tamanho da sentença")
             print("3. Verificar se sentença valida")
-            print("4. Como usar?")
-            print("5. Sair")
+            print("4. Tabela verdade")
+            print("5. Como usar?")
+            print("6. Sair")
 
             print("\nSentença atual: " + self._sentence.sentence_to_string())
 
@@ -75,4 +84,6 @@ class Interface(object):
             elif option == "3":
                 self.__check_if_sentence_is_valid()
             elif option == "4":
+                self.__truth_table()
+            elif option == "5":
                 self.__how_to_use()
